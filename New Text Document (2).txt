@@ -1,0 +1,137 @@
+ Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+
+class campaign{
+    protected:
+    char place[100];
+    int date;
+    char date_month[20];
+    int hr,min;
+    char name[15],last_name[15];
+    int age;
+    char disease[50];
+    long int contact;
+    
+};
+class info:public campaign{
+    public:
+    void get_place(){
+        
+        cout<<"\tEnter place of Campaign:";
+       cin.getline(place,100);
+    }
+    void show_place(){
+        
+        cout<<"\tPLACE="<<place;
+    }
+    void get_date(){
+        cout<<"\n\tEnter date and month of the campaign:";
+        cin>>date;
+        cin>>date_month;
+        
+    }
+    void show_date(){
+        cout<<"\tDATE="<<date<<" "<<date_month;
+    }
+    void get_time(){
+        cout<<"\n\tEnter time of campaign(hr min):";
+        cin>>hr>>min;
+    }
+    void show_time(){
+        cout<<"\tTIME="<<hr<<":"<<min;
+    }
+};
+
+class eligiblity:public campaign{
+    public:
+    int flag=0;
+    eligiblity(){};
+    ~eligiblity(){
+        if(flag==0)
+        cout<<"\nThanking you "<<name<<" "<<last_name<<"!!!!";
+        
+    };
+    void get_age(){
+        cout<<"\n\tenter age:";
+        cin>>age;
+        try{                        
+            if(age<18||age>60)
+                throw age;
+        }
+        catch(int age){
+            flag=1;
+            cout<<"Cannot donate!!!!";
+        }
+    }
+    void show_age(){
+        cout<<"\n\tAGE="<<age;
+    }
+    void get_disease(){
+        cout<<"\n\tenter any previous disease(No of none if not):";
+        cin>>disease;
+    }
+    void show_disease(){
+        cout<<"\n\tDISEASE="<<disease;
+    }
+    void get_name(){
+        cout<<"\n\tenter name of donor:";
+        cin>>name>>last_name;
+    }
+    void show_name(){
+        cout<<"\n\tNAME="<<name<<" "<<last_name;
+    }
+    void get_contact(){
+        cout<<"\n\tenter contact no :";
+        cin>>contact;
+    }
+    void show_contact(){
+        cout<<"\n\tCONTACT="<<contact;
+    }
+
+};
+
+int main() {
+    info obj;
+    cout<<"+++++++++++++++++++++++++++++++++++++++\n";
+    cout<<"\t\tFor Admin Purpose:";
+    cout<<"\n+++++++++++++++++++++++++++++++++++++++\n";
+    obj.get_place();
+    
+    obj.get_date();
+    
+    obj.get_time();
+    
+    cout<<"\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
+   cout<<"\nFor Donor Purpose:";
+   cout<<"\n++++++++++++++++++++++++++++++++++++++++++++++++++++++";
+   cout<<"\nEnter the no of donors:";
+   int n;
+   cin>>n;
+    cout<<"\n++++++++++++++++++++++++++++++++++++++++++";
+    eligiblity obj1[n];
+    for(int i=0;i<n;i++){
+    obj1[i].get_name();
+    obj1[i].get_age();
+    if(obj1[i].flag==0){
+    obj1[i].get_contact();
+    obj1[i].get_disease();
+    }
+    }
+     cout<<"\n++++++++++++++++++++++++++++++++++++++++++\n";
+     cout<<"-----------VENUE DETAILS ARE----------------- \n";
+     obj.show_place();
+    obj.show_date();
+    obj.show_time();
+    cout<<"\n++++++++++++++++++++++++++++++++++++++++++\n";
+    for(int i=0;i<n;i++){
+        if(obj1[i].flag==0){
+    obj1[i].show_name();
+    obj1[i].show_age();
+    obj1[i].show_contact();
+    obj1[i].show_disease();
+        
+   cout<<"\n++++++++++++++++++++++++++++++++++++++++++\n";
+        }
+    }
+}
